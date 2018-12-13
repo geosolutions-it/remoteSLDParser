@@ -31,18 +31,25 @@ public class RemoteSLDParser {
 
             // go one by one and extract interesting bits as a demo
             for (StyledLayer layer : sld.getStyledLayers()) {
+                // grab the styles and for each one
                 Style[] styles = getStyles(layer);
                 for (Style style : styles) {
+                    // report name and number of feature type styles
                     System.out.println("--- Found style " + style.getName() + " ---");
                     final List<FeatureTypeStyle> featureTypeStyles = style.featureTypeStyles();
                     System.out.println("Style has " + featureTypeStyles.size() + " feature type " +
                             "style");
                     int ftsCount = 1;
+                    // for each feature type style
                     for (FeatureTypeStyle featureTypeStyle : featureTypeStyles) {
                         System.out.println("  FeatureTypeStyle " + ftsCount++);
+                        // report the rules
                         final List<Rule> rules = featureTypeStyle.rules();
                         for (Rule rule : rules) {
-                            System.out.println("    " + Optional.ofNullable(rule.getFilter()).orElse(Filter.INCLUDE));
+                            // the filter, the scale ranges, and symbolizer types involved
+                            System.out.println("    Filter: " + Optional.ofNullable(rule.getFilter()).orElse(Filter.INCLUDE));
+                            System.out.println("    Scales: " + rule.getMinScaleDenominator() + 
+                                    "/" + rule.getMaxScaleDenominator());
                             System.out.println("      " + rule.symbolizers().stream().map(s -> s.getClass().getSimpleName()).collect(Collectors.joining("\n      ")));
                         }
                     }
@@ -52,6 +59,11 @@ public class RemoteSLDParser {
         }
     }
 
+    /**
+     * A SLD can contain user layer or named layer, they have a different structure but both
+     * can contain a list of style definitions (what changes is how the data source is represented).
+     * This method extracts the list of styles
+     */
     private static Style[] getStyles(StyledLayer layer) {
         if (layer instanceof UserLayer) {
             UserLayer userLayer = (UserLayer) layer;
@@ -63,6 +75,9 @@ public class RemoteSLDParser {
 
     }
 
+    /**
+     * Parses a full SLD document from a stream resource
+     */
     private static StyledLayerDescriptor parseStyleFromStream(InputStream is) {
         final StyleFactory styleFactory = CommonFactoryFinder.getStyleFactory();
         SLDParser parser = new SLDParser(styleFactory, is);

@@ -5,33 +5,43 @@ Sample output:
 
 ````
 --- Found style wind-wb-arrows-lod ---
+--- Found style wind-wb-arrows-lod ---
 Style has 1 feature type style
   FeatureTypeStyle 1
-    [ lod = 0 ]
+    Filter: [ lod = 0 ]
+    Scales: 2.5E7/4.0E8
       PointSymbolizerImpl
-    [ in([lod], [0], [1]) = true ]
+    Filter: [ in([lod], [0], [1]) = true ]
+    Scales: 2.0E7/2.5E7
       PointSymbolizerImpl
-    [ in([lod], [0], [1]) = true ]
+    Filter: [ in([lod], [0], [1]) = true ]
+    Scales: 1.0E7/2.0E7
       PointSymbolizerImpl
-    [ in([lod], [0], [1]) = true ]
+    Filter: [ in([lod], [0], [1]) = true ]
+    Scales: 3000000.0/1.0E7
       PointSymbolizerImpl
-    [ in([lod], [0], [1], [2], [3]) = true ]
+    Filter: [ in([lod], [0], [1], [2], [3]) = true ]
+    Scales: 0.0/3000000.0
       PointSymbolizerImpl
 
 
 --- Found style wind-arrows-lod-text ---
 Style has 1 feature type style
   FeatureTypeStyle 1
-    [ lod = 0 ]
+    Filter: [ lod = 0 ]
+    Scales: 2.5E7/Infinity
       PointSymbolizerImpl
       TextSymbolizerImpl
-    [[ lod = 1 ] OR [ lod = 0 ]]
+    Filter: [[ lod = 1 ] OR [ lod = 0 ]]
+    Scales: 5000000.0/2.5E7
       PointSymbolizerImpl
       TextSymbolizerImpl
-    [[ lod = 1 ] OR [ lod = 0 ] OR [ lod = 2 ]]
+    Filter: [[ lod = 1 ] OR [ lod = 0 ] OR [ lod = 2 ]]
+    Scales: 1000000.0/5000000.0
       PointSymbolizerImpl
       TextSymbolizerImpl
-    Filter.INCLUDE
+    Filter: Filter.INCLUDE
+    Scales: 0.0/1000000.0
       PointSymbolizerImpl
       TextSymbolizerImpl
 
@@ -39,12 +49,16 @@ Style has 1 feature type style
 --- Found style wind-arrows-lod ---
 Style has 1 feature type style
   FeatureTypeStyle 1
-    [ lod = 0 ]
+    Filter: [ lod = 0 ]
+    Scales: 2.5E7/4.0E8
       PointSymbolizerImpl
-    [[ lod = 1 ] OR [ lod = 0 ]]
+    Filter: [[ lod = 1 ] OR [ lod = 0 ]]
+    Scales: 5000000.0/2.5E7
       PointSymbolizerImpl
-    [[ lod = 1 ] OR [ lod = 0 ] OR [ lod = 2 ]]
+    Filter: [[ lod = 1 ] OR [ lod = 0 ] OR [ lod = 2 ]]
+    Scales: 1000000.0/5000000.0
       PointSymbolizerImpl
-    Filter.INCLUDE
+    Filter: Filter.INCLUDE
+    Scales: 0.0/1000000.0
       PointSymbolizerImpl
 ````
